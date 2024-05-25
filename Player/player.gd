@@ -20,5 +20,5 @@ func _physics_process(delta: float) -> void:
 	else :
 		velocity = velocity.move_toward(Vector2.ZERO,FRICTION * delta)	#摩擦力
 	
-	move_and_collide(velocity * delta)
+	move_and_slide()
 
