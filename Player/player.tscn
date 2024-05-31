@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://jy0fexd7h55g"]
+[gd_scene load_steps=28 format=3 uid="uid://jy0fexd7h55g"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_d3nqt"]
 [ext_resource type="Texture2D" uid="uid://drfddsh45r5yv" path="res://Player/Player.png" id="2_1dkym"]
@@ -151,6 +151,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_r1iko"]
 resource_name = "RunUp"
 length = 0.6
+loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -178,6 +179,71 @@ _data = {
 "RunUp": SubResource("Animation_r1iko")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c5nl1"]
+animation = &"IdleLeft"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jklph"]
+animation = &"IdleRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3wk5l"]
+animation = &"IdleDown"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4ciq2"]
+animation = &"IdleUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_3n4w6"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_c5nl1")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_jklph")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_3wk5l")
+blend_point_2/pos = Vector2(0, 1.1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_4ciq2")
+blend_point_3/pos = Vector2(0, -1.1)
+min_space = Vector2(-1, -1.1)
+max_space = Vector2(1, 1.1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l8foi"]
+animation = &"RunLeft"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qnoro"]
+animation = &"RunDown"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1idx8"]
+animation = &"RunUp"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pmbpt"]
+animation = &"RunRight"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_gvgec"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_l8foi")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_qnoro")
+blend_point_1/pos = Vector2(0, 1.1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_1idx8")
+blend_point_2/pos = Vector2(0, -1.1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_pmbpt")
+blend_point_3/pos = Vector2(1, 0)
+min_space = Vector2(-1, -1.1)
+max_space = Vector2(1, 1.1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hqm20"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lpkej"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i565c"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_c1qe6"]
+states/Idle/node = SubResource("AnimationNodeBlendSpace2D_3n4w6")
+states/Idle/position = Vector2(422.54, 99.75)
+states/Run/node = SubResource("AnimationNodeBlendSpace2D_gvgec")
+states/Run/position = Vector2(674.54, 105.5)
+transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_hqm20"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_lpkej"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_i565c")]
+graph_offset = Vector2(-9.7769, 0)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_d3nqt")
 
@@ -199,3 +265,48 @@ libraries = {
 "": SubResource("AnimationLibrary_d87ro")
 }
 autoplay = "RunRight"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_c1qe6")
+anim_player = NodePath("../AnimationPlayer")
+parameters/current_length = 6.0
+parameters/current_position = 0.305487
+parameters/current_delta = 0.011095
+parameters/End/current_length = 0.0
+parameters/End/current_position = 0.0
+parameters/End/current_delta = 0.0
+parameters/Idle/current_length = 6.0
+parameters/Idle/current_position = 0.305487
+parameters/Idle/current_delta = 0.011095
+parameters/Idle/blend_position = Vector2(0.000704169, 0.00440526)
+parameters/Idle/0/current_length = null
+parameters/Idle/0/current_position = null
+parameters/Idle/0/current_delta = null
+parameters/Idle/1/current_length = 0.1
+parameters/Idle/1/current_position = 0.00846954
+parameters/Idle/1/current_delta = 0.00694444
+parameters/Idle/2/current_length = 6.0
+parameters/Idle/2/current_position = 0.0972623
+parameters/Idle/2/current_delta = 0.017041
+parameters/Idle/3/current_length = 6.0
+parameters/Idle/3/current_position = 0.305487
+parameters/Idle/3/current_delta = 0.011095
+parameters/Run/current_length = 0.6
+parameters/Run/current_position = 0.0
+parameters/Run/current_delta = 0.0
+parameters/Run/blend_position = Vector2(0, 0)
+parameters/Run/0/current_length = null
+parameters/Run/0/current_position = null
+parameters/Run/0/current_delta = null
+parameters/Run/1/current_length = 0.6
+parameters/Run/1/current_position = 0.0
+parameters/Run/1/current_delta = 0.0
+parameters/Run/2/current_length = null
+parameters/Run/2/current_position = null
+parameters/Run/2/current_delta = null
+parameters/Run/3/current_length = 0.6
+parameters/Run/3/current_position = 0.53302
+parameters/Run/3/current_delta = 0.0166667
+parameters/Start/current_length = 0.0
+parameters/Start/current_position = 0.0
+parameters/Start/current_delta = 0.0

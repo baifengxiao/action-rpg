@@ -7,6 +7,8 @@ const FRICTION = 10 * 60
 var input_vector = Vector2.ZERO
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var animationState =animation_tree.get("parameters/playback")
 
 func _physics_process(delta: float) -> void:
 	
@@ -18,14 +20,19 @@ func _physics_process(delta: float) -> void:
 	
 	#非零向量
 	if input_vector != Vector2.ZERO:
-		if input_vector.x >0:
-			animation_player.play("RunRight")
-		else :
-			animation_player.play("RunLeft")
-			
+		
+		#if input_vector.x >0:
+			#animation_player.play("RunRight")
+		#else :
+			#animation_player.play("RunLeft")
+		animation_tree.set("parameters/Idle/blend_position",input_vector)
+		animation_tree.set("parameters/Run/blend_position",input_vector)
+		animationState.travel("Run")
+		
 		velocity = velocity.move_toward(input_vector * MAX_SPEED,ACCELERATION * delta - FRICTION * delta)
 	else :
-		animation_player.play("IdleRight")
+		animationState.travel("Idle")
+		#animation_player.play("IdleRight")
 		velocity = velocity.move_toward(Vector2.ZERO,FRICTION * delta)	#摩擦力
 	
 	move_and_slide()
