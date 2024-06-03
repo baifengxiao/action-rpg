@@ -1,7 +1,8 @@
-[gd_scene load_steps=39 format=3 uid="uid://jy0fexd7h55g"]
+[gd_scene load_steps=41 format=3 uid="uid://jy0fexd7h55g"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_d3nqt"]
 [ext_resource type="Texture2D" uid="uid://drfddsh45r5yv" path="res://Player/Player.png" id="2_1dkym"]
+[ext_resource type="PackedScene" uid="uid://bc5ytq8ycu7fn" path="res://Effects/Hitbox&Hurtbox/hitbox.tscn" id="3_mky1o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yusqv"]
 radius = 2.0
@@ -37,6 +38,30 @@ tracks/1/keys = {
 "method": &"attack_animation_finished"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxPivot:rotation")
+tracks/2/interp = 3
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3.14159]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_btc3j"]
 resource_name = "AttackLeft"
@@ -68,10 +93,34 @@ tracks/1/keys = {
 "method": &"attack_animation_finished"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxPivot:rotation")
+tracks/2/interp = 3
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4.71239]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_w7sm8"]
 resource_name = "AttackRight"
-length = 0.5
+length = 0.4
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -98,6 +147,30 @@ tracks/1/keys = {
 "args": [],
 "method": &"attack_animation_finished"
 }]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxPivot:rotation")
+tracks/2/interp = 3
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.5708]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_joedr"]
@@ -129,6 +202,30 @@ tracks/1/keys = {
 "args": [],
 "method": &"attack_animation_finished"
 }]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxPivot:rotation")
+tracks/2/interp = 3
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_c3ywp"]
@@ -216,6 +313,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitboxPivot:rotation")
+tracks/1/interp = 3
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_uk26h"]
@@ -401,8 +522,13 @@ states/Run/position = Vector2(674.54, 100.25)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_hqm20"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_lpkej"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_i565c"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_xmng7"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_lvaoy")]
 graph_offset = Vector2(164.223, 45)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oa44l"]
+radius = 5.0
+height = 10.0
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
+collision_layer = 2
 script = ExtResource("1_d3nqt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -429,8 +555,8 @@ autoplay = "RunRight"
 tree_root = SubResource("AnimationNodeStateMachine_c1qe6")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 6.0
-parameters/current_position = 3.6251
-parameters/current_delta = 0.00694444
+parameters/current_position = 0.195011
+parameters/current_delta = 0.006984
 parameters/Attack/current_length = 0.4
 parameters/Attack/current_position = 0.4
 parameters/Attack/current_delta = 0.0
@@ -451,15 +577,15 @@ parameters/End/current_length = 0.0
 parameters/End/current_position = 0.0
 parameters/End/current_delta = 0.0
 parameters/Idle/current_length = 6.0
-parameters/Idle/current_position = 3.6251
-parameters/Idle/current_delta = 0.00694444
+parameters/Idle/current_position = 0.195011
+parameters/Idle/current_delta = 0.006984
 parameters/Idle/blend_position = Vector2(0.000704169, 0.00440526)
 parameters/Idle/0/current_length = null
 parameters/Idle/0/current_position = null
 parameters/Idle/0/current_delta = null
 parameters/Idle/1/current_length = 6.0
-parameters/Idle/1/current_position = 3.6251
-parameters/Idle/1/current_delta = 0.00694444
+parameters/Idle/1/current_position = 0.195011
+parameters/Idle/1/current_delta = 0.006984
 parameters/Idle/2/current_length = 6.0
 parameters/Idle/2/current_position = 0.0972623
 parameters/Idle/2/current_delta = 0.017041
@@ -485,3 +611,18 @@ parameters/Run/3/current_delta = 0.0166667
 parameters/Start/current_length = 0.0
 parameters/Start/current_position = 0.0
 parameters/Start/current_delta = 0.0
+
+[node name="HitboxPivot" type="Marker2D" parent="."]
+position = Vector2(1, -2)
+
+[node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource("3_mky1o")]
+position = Vector2(-2.8213e-07, -6)
+rotation = -1.5708
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="HitboxPivot/SwordHitbox" index="0"]
+position = Vector2(0, -2.38419e-07)
+scale = Vector2(0.819368, 1)
+shape = SubResource("CapsuleShape2D_oa44l")
+
+[editable path="HitboxPivot/SwordHitbox"]

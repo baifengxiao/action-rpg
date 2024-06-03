@@ -1899,6 +1899,7 @@ texture = ExtResource("5_anls2")
 
 [sub_resource type="TileSet" id="TileSet_0iru4"]
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Cliff"
 terrain_set_0/terrain_0/color = Color(0.768627, 0.176471, 0.25098, 1)
