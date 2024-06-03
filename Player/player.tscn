@@ -402,6 +402,7 @@ transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_h
 graph_offset = Vector2(164.223, 45)
 
 [node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
 script = ExtResource("1_d3nqt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -427,9 +428,9 @@ autoplay = "RunRight"
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_c1qe6")
 anim_player = NodePath("../AnimationPlayer")
-parameters/current_length = 0.4
-parameters/current_position = 0.4
-parameters/current_delta = 0.0
+parameters/current_length = 6.0
+parameters/current_position = 3.6251
+parameters/current_delta = 0.00694444
 parameters/Attack/current_length = 0.4
 parameters/Attack/current_position = 0.4
 parameters/Attack/current_delta = 0.0
@@ -450,15 +451,15 @@ parameters/End/current_length = 0.0
 parameters/End/current_position = 0.0
 parameters/End/current_delta = 0.0
 parameters/Idle/current_length = 6.0
-parameters/Idle/current_position = 0.0
-parameters/Idle/current_delta = 0.0
+parameters/Idle/current_position = 3.6251
+parameters/Idle/current_delta = 0.00694444
 parameters/Idle/blend_position = Vector2(0.000704169, 0.00440526)
 parameters/Idle/0/current_length = null
 parameters/Idle/0/current_position = null
 parameters/Idle/0/current_delta = null
 parameters/Idle/1/current_length = 6.0
-parameters/Idle/1/current_position = 0.0
-parameters/Idle/1/current_delta = 0.0
+parameters/Idle/1/current_position = 3.6251
+parameters/Idle/1/current_delta = 0.00694444
 parameters/Idle/2/current_length = 6.0
 parameters/Idle/2/current_position = 0.0972623
 parameters/Idle/2/current_delta = 0.017041
