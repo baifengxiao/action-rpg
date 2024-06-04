@@ -10,12 +10,12 @@ enum {
 }
 
 var state = MOVE
-
 var input_vector = Vector2.ZERO
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animationState =animation_tree.get("parameters/playback")
+@onready var sword_hitbox: Area2D = $HitboxPivot/SwordHitbox
 
 func _ready() -> void:
 	animation_tree.active=true
@@ -39,10 +39,8 @@ func move_state(delta):
 	#非零向量
 	if input_vector != Vector2.ZERO:
 		
-		#if input_vector.x >0:
-			#animation_player.play("RunRight")
-		#else :
-			#animation_player.play("RunLeft")
+		#击退方向同步移动方向
+		sword_hitbox.knockback_vector=input_vector
 		animation_tree.set("parameters/Idle/blend_position",input_vector)
 		animation_tree.set("parameters/Run/blend_position",input_vector)
 		animation_tree.set("parameters/Attack/blend_position",input_vector)
