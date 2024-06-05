@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const ENEMY_DEATH_EFFECT = preload("res://Effects/enemy_death_effect.tscn")
+
 #初始化击退向量
 var knockback = Vector2.ZERO
 
@@ -28,3 +30,7 @@ func _on_hurtbox_area_entered(area):
 
 func _on_stats_no_health() -> void:
 	queue_free()
+	var enemyDeathEffect = ENEMY_DEATH_EFFECT.instantiate()
+	get_parent().add_child(enemyDeathEffect)
+	enemyDeathEffect.global_position = global_position
+	
