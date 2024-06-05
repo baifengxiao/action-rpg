@@ -2,21 +2,70 @@ extends CharacterBody2D
 
 const ENEMY_DEATH_EFFECT = preload("res://Effects/enemy_death_effect.tscn")
 
+@export var ACCELERATION = 300
+@export var MAX_SPEED = 10
+@export var FRICTION = 100
+
+enum{
+	IDLE,
+	WANDER,
+	CHASE
+}
+
 #初始化击退向量
 var knockback = Vector2.ZERO
 
+var state = CHASE
+
+@onready var playerDetectionZone = $PlayerDetectionZone
+
 @onready var stats: Node2D = $Stats
+@onready var sprite = $AnimatedSprite2D
 
 func _physics_process(delta):
 	
-	#定义击退的速度向量
-	#不能连写，连写没有保留前一帧的 velocity 减速状态，就会停不下来！！
-	knockback = knockback.move_toward(Vector2.ZERO,200 * delta)
-	velocity = knockback
+	##定义击退的速度向量
+	##不能连写，连写没有保留前一帧的 velocity 减速状态，就会停不下来！！
+	#knockback = knockback.move_toward(Vector2.ZERO,FRICTION * delta)
+	#velocity = knockback
+	##引入进了IDLE，不用这个了
+	
 	move_and_slide()
 	
 	#knockback=velocity
 	
+	match state:
+		IDLE:
+			# 蝙蝠的击退速度
+			velocity=velocity.move_toward(Vector2.ZERO,FRICTION * delta)
+			seek_player()
+			
+		WANDER:
+			pass
+			
+		CHASE:
+			
+			
+			var player = playerDetectionZone.player
+			print(player)
+			if player != null:
+				
+				var direction = (player.global_position - global_position).normalized()
+				velocity = velocity.move_toward(direction * MAX_SPEED ,ACCELERATION * delta)
+			else :
+				#避免离开时追赶方向停不下来
+				state = IDLE
+	
+			#调整追赶中的方向
+			sprite.flip_h = velocity.x < 0
+	move_and_slide()	
+	#TODO，这里的逻辑有得研究，这里seek_player() 放在match语句前执行就好，IDLE和CHASE都需要状态转换，而且它CHASE的那个判断很迷，就是等于seekplayer
+		
+func seek_player():
+	if playerDetectionZone.can_see_player():
+		state = CHASE	
+		
+
 func _on_hurtbox_area_entered(area):
 	stats.health -= area.damage
 	#if stats.health <= 0:
