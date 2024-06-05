@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ffv0n455l0at"]
+
+[ext_resource type="Script" path="res://stats.gd" id="1_xg53k"]
+
+[node name="Stats" type="Node2D"]
+script = ExtResource("1_xg53k")
+max_health = 2
+
+[connection signal="no_health" from="." to="." method="_on_no_health"]
