@@ -11,13 +11,17 @@ enum {
 
 var state = MOVE
 var input_vector = Vector2.ZERO
+var stats = PlayerStats
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animationState =animation_tree.get("parameters/playback")
 @onready var sword_hitbox: Area2D = $HitboxPivot/SwordHitbox
+@onready var hurtbox: Area2D = $Hurtbox
+
 
 func _ready() -> void:
+	stats.connect("no_health",queue_free)
 	animation_tree.active=true
 
 func _physics_process(delta: float) -> void:
@@ -63,3 +67,11 @@ func attack_state(delta):
 
 func attack_animation_finished():
 	state = MOVE
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	print("被蝙蝠攻击了")
+	stats.health -= 1
+	print(stats.health)
+	#开启无敌
+	hurtbox.start_invincibility(0.5)
+	hurtbox.create_hit_effect()

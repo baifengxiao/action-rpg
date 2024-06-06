@@ -21,6 +21,8 @@ var state = CHASE
 
 @onready var stats: Node2D = $Stats
 @onready var sprite = $AnimatedSprite2D
+@onready var hurtbox: Area2D = $Hurtbox
+
 
 func _physics_process(delta):
 	
@@ -47,7 +49,7 @@ func _physics_process(delta):
 			
 			
 			var player = playerDetectionZone.player
-			print(player)
+			
 			if player != null:
 				
 				var direction = (player.global_position - global_position).normalized()
@@ -67,13 +69,16 @@ func seek_player():
 		
 
 func _on_hurtbox_area_entered(area):
+	
 	stats.health -= area.damage
+	
 	#if stats.health <= 0:
 		#queue_free()
 		
 	#knockback_vector后面定义，测试用随便一个方向，比如右方向替换
 	knockback = area.knockback_vector *120
-
+	hurtbox.create_hit_effect()
+	
 #func _on_hurtbox_area_entered(area: Area2D) -> void:
 	#queue_free()
 
