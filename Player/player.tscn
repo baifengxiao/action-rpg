@@ -1,10 +1,11 @@
-[gd_scene load_steps=44 format=3 uid="uid://jy0fexd7h55g"]
+[gd_scene load_steps=45 format=3 uid="uid://jy0fexd7h55g"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_d3nqt"]
 [ext_resource type="Texture2D" uid="uid://drfddsh45r5yv" path="res://Player/Player.png" id="2_1dkym"]
 [ext_resource type="PackedScene" uid="uid://bc5ytq8ycu7fn" path="res://Effects/Hitbox&Hurtbox/hitbox.tscn" id="3_mky1o"]
 [ext_resource type="Script" path="res://Effects/Hitbox&Hurtbox/SworldHitbox.gd" id="4_buolq"]
 [ext_resource type="PackedScene" uid="uid://bi60yctrnktic" path="res://Effects/Hitbox&Hurtbox/hurtbox.tscn" id="5_mid1e"]
+[ext_resource type="Texture2D" uid="uid://dbw1trpyneesm" path="res://Shadows/MediumShadow.png" id="6_67gb0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yusqv"]
 radius = 2.0
@@ -562,7 +563,7 @@ autoplay = "RunRight"
 tree_root = SubResource("AnimationNodeStateMachine_c1qe6")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 6.0
-parameters/current_position = 5.55642
+parameters/current_position = 0.899156
 parameters/current_delta = 0.0166667
 parameters/Attack/current_length = 0.4
 parameters/Attack/current_position = 0.4
@@ -584,14 +585,14 @@ parameters/End/current_length = 0.0
 parameters/End/current_position = 0.0
 parameters/End/current_delta = 0.0
 parameters/Idle/current_length = 6.0
-parameters/Idle/current_position = 5.55642
+parameters/Idle/current_position = 0.899156
 parameters/Idle/current_delta = 0.0166667
 parameters/Idle/blend_position = Vector2(1, 0)
 parameters/Idle/0/current_length = null
 parameters/Idle/0/current_position = null
 parameters/Idle/0/current_delta = null
 parameters/Idle/1/current_length = 6.0
-parameters/Idle/1/current_position = 5.55642
+parameters/Idle/1/current_position = 0.899156
 parameters/Idle/1/current_delta = 0.0166667
 parameters/Idle/2/current_length = 6.0
 parameters/Idle/2/current_position = 0.0972623
@@ -640,6 +641,11 @@ collision_mask = 4
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 scale = Vector2(0.668911, 0.668911)
 shape = SubResource("CapsuleShape2D_qqpkq")
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_67gb0")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 
