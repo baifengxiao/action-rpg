@@ -6,6 +6,7 @@ const ENEMY_DEATH_EFFECT = preload("res://Effects/enemy_death_effect.tscn")
 @export var MAX_SPEED = 10
 @export var FRICTION = 100
 
+
 enum{
 	IDLE,
 	WANDER,
@@ -22,6 +23,7 @@ var state = CHASE
 @onready var stats: Node2D = $Stats
 @onready var sprite = $AnimatedSprite2D
 @onready var hurtbox: Area2D = $Hurtbox
+@onready var soft_collsion: Area2D = $softCollsion
 
 
 func _physics_process(delta):
@@ -60,6 +62,8 @@ func _physics_process(delta):
 	
 			#调整追赶中的方向
 			sprite.flip_h = velocity.x < 0
+	if soft_collsion.is_colliding():
+		velocity += soft_collsion.get_push_vector() * delta * 400
 	move_and_slide()	
 	#TODO，这里的逻辑有得研究，这里seek_player() 放在match语句前执行就好，IDLE和CHASE都需要状态转换，而且它CHASE的那个判断很迷，就是等于seekplayer
 		

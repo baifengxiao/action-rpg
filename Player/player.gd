@@ -69,9 +69,9 @@ func attack_animation_finished():
 	state = MOVE
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	print("被蝙蝠攻击了")
+	
 	stats.health -= 1
-	print(stats.health)
+	
 	#开启无敌
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
