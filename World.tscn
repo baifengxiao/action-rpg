@@ -1914,13 +1914,18 @@ y_sort_enabled = true
 
 [node name="Background" type="Sprite2D" parent="."]
 texture_repeat = 2
+position = Vector2(-158, -112)
+scale = Vector2(1.57813, 1.64583)
 texture = ExtResource("1_tl7to")
 centered = false
 region_enabled = true
-region_rect = Rect2(0, 0, 320, 180)
+region_rect = Rect2(0, 0, 384, 240)
 
 [node name="Player" parent="." instance=ExtResource("2_jc0yk")]
 position = Vector2(168, 88)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
 
 [node name="DirtPathTileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_fw0mv")
@@ -1994,12 +1999,6 @@ position = Vector2(207, 77)
 [node name="Bat4" parent="Bats" instance=ExtResource("7_j57k6")]
 position = Vector2(208, 102)
 
-[node name="HealthUI" parent="." instance=ExtResource("8_uw165")]
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 107.0
-offset_bottom = 43.0
-
 [node name="Bushs" type="Node2D" parent="."]
 
 [node name="Bush" parent="Bushs" instance=ExtResource("9_1gwjs")]
@@ -2018,3 +2017,14 @@ position = Vector2(96, 152)
 
 [node name="Tree3" parent="BigTrees" instance=ExtResource("10_vtmx2")]
 position = Vector2(258, -27)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource("8_uw165")]
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 107.0
+offset_bottom = 43.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(168, 88)
