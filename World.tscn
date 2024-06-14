@@ -1991,13 +1991,10 @@ position = Vector2(208, 64)
 [node name="Bats" type="Node2D" parent="."]
 
 [node name="Bat" parent="Bats" instance=ExtResource("7_j57k6")]
-position = Vector2(205, 86)
-
-[node name="Bat3" parent="Bats" instance=ExtResource("7_j57k6")]
-position = Vector2(207, 77)
+position = Vector2(242, 90)
 
 [node name="Bat4" parent="Bats" instance=ExtResource("7_j57k6")]
-position = Vector2(208, 102)
+position = Vector2(97, 93)
 
 [node name="Bushs" type="Node2D" parent="."]
 
